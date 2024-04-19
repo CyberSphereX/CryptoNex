@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import bgImage from "./Assets/hero.png"
-
+import { apiCall } from "./redux/coinsSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 const Home = () => {
+
+
+    const dispatch = useDispatch();
+    const isLoading = useSelector((state) => state.coins.pending);
+    const data = useSelector((state) => state.coins.data);
+
+
+
+    useEffect(() => {
+        dispatch(apiCall());
+
+    }, [dispatch])
+
+    console.log(isLoading);
+
+
+
     return (
         <>
-            <div style={{ backgroundImage: `url(${bgImage})` }} className='bg-center bg-no-repeat h-[60vh] bg-cover flex items-center , justify-center flex-col'     >
+            <div style={{ backgroundImage: `url(${bgImage})` }} className='bg-center bg-no-repeat h-[60vh] bg-cover flex items-center , justify-center flex-col bg-slate-800'     >
                 <div >
                     <h5 className='text-customYellow text-sm' >
                         Welcome to Cryptonex
@@ -20,8 +38,16 @@ const Home = () => {
                     </p>
                 </div>
             </div>
-            <marquee behavior="" direction="">
-                <img src={bgImage}  className='rounded-full' />
+            <marquee className='flex flex-row justify-center items-center h-16 bg-customSlate'>
+                {data && data.map((item, index) => (
+                    <>
+                        <img key={index} src={item.image} alt={`Image ${index}`} className='inline mr-4 '  width={40} />
+                        <p className='inline text-white mr-14'>
+                            {item.name}
+                        </p>
+                    </>
+
+                ))}
             </marquee>
         </>
     )

@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        customYellow: '#f4a641'
+        customYellow: '#f4a641',
+        customSlate: "#1e252e"
       }
     },
   },

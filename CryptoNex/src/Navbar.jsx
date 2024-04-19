@@ -35,7 +35,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className="text-gray-600 body-font bg-slate-800 flex items-center ">
+        <header className="text-gray-600 body-font bg-customSlate flex items-center ">
             <div className="mx-auto flex flex-wrap p-5 items-center sm:w-[85%] justify-between w-[100%]">
                 {/* Logo Link */}
                 <Link to="/home" className="flex title-font font-medium items-center  text-gray-900 ">
