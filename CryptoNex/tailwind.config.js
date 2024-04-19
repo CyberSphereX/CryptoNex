@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         customYellow: '#f4a641',
-        customSlate: "#1e252e"
+        customSlate: "#1e252e",
+        customBg: "#121923"
       }
     },
   },
