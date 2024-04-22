@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './Assets/logo.png';
+import logo from '../Assets/logo.png';
 import { motion, AnimatePresence, color } from 'framer-motion';
 import HomeIcon from '@mui/icons-material/Home';
 import StoreIcon from '@mui/icons-material/Store';

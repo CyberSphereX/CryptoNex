@@ -1,7 +1,7 @@
-import Navbar from "./Navbar"
-import Home from "./Home"
-import Markets from "./Markets"
-import Error from "./Error"
+import Navbar from "./Components/Navbar"
+import Home from "./Pages/Home"
+import Markets from "./Pages/Markets"
+import Error from "./Pages/Error"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 function App() {
   return (

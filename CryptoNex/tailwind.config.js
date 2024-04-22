@@ -9,7 +9,9 @@ export default {
       colors: {
         customYellow: '#f4a641',
         customSlate: "#1e252e",
-        customBg: "#121923"
+        customBg: "#121923",
+        customWhite: "#c3c4c3 ",
+        inputColor: "#293039"
       }
     },
   },

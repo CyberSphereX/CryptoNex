@@ -1,0 +1,27 @@
+.slider-container {
+    display: flex;
+    overflow: hidden;
+    gap: 100px;
+    background: red;
+
+}
+
+.slider-content {
+    display: flex;
+    flex-wrap: nowrap;
+    animation: marquee 20s linear infinite;
+    animation-delay: -20s;
+    margin-right: 100px;
+    /* Delay to restart the animation after 20s */
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-100% * 0.25));
+        /* Adjust based on number of components */
+    }
+}
