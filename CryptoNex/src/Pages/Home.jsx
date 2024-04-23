@@ -19,11 +19,13 @@ import p9 from "../Assets/Partners/p9.svg"
 import CoinInfo from '../Components/CoinInfo'
 import "./scroll.css"
 import Footer from '../Components/Footer'
+import { Circles } from 'react-loader-spinner';
 
 const Home = () => {
     const lineBreak = 310;
     const dispatch = useDispatch();
     const data = useSelector((state) => state.coins.data);
+    const isLoading = useSelector((state) => state.coins.pending)
     useEffect(() => {
         dispatch(apiCall());
 
@@ -89,17 +91,36 @@ const Home = () => {
                 </div>
             </div>
             {/* marquee */}
-            <marquee className='flex flex-row justify-center items-center h-16 bg-customSlate'>
-                {data && data.map((item, index) => (
-                    <>
-                        <img src={item.image} alt={`Image ${index}`} className='inline mr-4 ' width={40} />
-                        <p className='inline text-white mr-14'>
-                            {item.name}
-                        </p>
-                    </>
+            {
+                isLoading ? (<div className='flex justify-between flex-col mt-28 text-customYellow items-center' >
+                    <div>
+                        <Circles
+                            height="80"
+                            width="80"
+                            color="#f4a641"
+                            ariaLabel="circles-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    </div>
+                    <h1 className='-mr-2 mt-4 text-2xl'>
+                        Loading...
+                    </h1>
+                </div>) : (<marquee className='flex flex-row justify-center items-center h-16 bg-customSlate'>
+                    {data && data.map((item, index) => (
+                        <>
+                            <img src={item.image} alt={`Image ${index}`} className='inline mr-4 ' width={40} />
+                            <p className='inline text-white mr-14'>
+                                {item.name}
+                            </p>
+                        </>
 
-                ))}
-            </marquee>
+                    ))}
+                </marquee>)
+            }
+
+
             <div className='text-white text-center mt-14  ' >
                 <AnimateY delay={0} classes={"text-customYellow"}>
                     <>
@@ -272,21 +293,42 @@ const Home = () => {
                     <WordAnimate text="Price" />
                 </div>
             </div>
-            <marquee className="mt-24" scrollamount="20" >
-                <div className='flex gap-6'>
-                    {data.map((instance, index) => {
-                        if (index % 2 === 0) {
-                            return (
-                                <div key={index} className="w-72">
-                                    <CoinInfo data={instance} />
-                                </div>
-                            );
-                        } else {
-                            return null;
-                        }
-                    })}
-                </div>
-            </marquee>
+            {
+                isLoading ? (
+
+                    <div className='flex justify-center items-center mt-28 flex-col text-customYellow' >
+                        <div>
+                            <Circles
+                                height="80"
+                                width="80"
+                                color="#f4a641"
+                                ariaLabel="circles-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                                visible={true}
+                            />
+                        </div>
+                        <h1 className='-mr-2 mt-4 text-2xl'>
+                            Loading...
+                        </h1>
+                    </div>
+                ) : (<marquee className="mt-24" scrollamount="20" >
+                    <div className='flex gap-6'>
+                        {data.map((instance, index) => {
+                            if (index % 2 === 0) {
+                                return (
+                                    <div key={index} className="w-72">
+                                        <CoinInfo data={instance} />
+                                    </div>
+                                );
+                            } else {
+                                return null;
+                            }
+                        })}
+                    </div>
+                </marquee>)
+            }
+
             <marquee className="mt-24" scrollamount="25" direction="right"   >
                 <div className='flex gap-4' style={{ minWidth: "500px" }}>
                     {data.map((instance, index) => {
