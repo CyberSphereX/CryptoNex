@@ -11,7 +11,8 @@ export default {
         customSlate: "#1e252e",
         customBg: "#121923",
         customWhite: "#c3c4c3 ",
-        inputColor: "#293039"
+        inputColor: "#293039",
+        textColor: "#7c8083"
       }
     },
   },
