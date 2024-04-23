@@ -1,51 +1,47 @@
-import React, { useEffect } from 'react'
-import { motion, useInView, useAnimation } from "framer-motion"
+import React, { useEffect } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import { useRef } from 'react';
+
 const WordAnimate = ({ text }) => {
-    const words = String(text).split(' '); // Split text into words based on spaces
+    const words = text.split(' '); 
     const ref = useRef();
-    const isInView = useInView(ref, { once: true });
+    const isInView = useInView(ref, { triggerOnce: true });
     const mainControls = useAnimation();
 
     useEffect(() => {
-        mainControls.start("visible")
-    }, [isInView])
+        if (isInView) {
+            mainControls.start('visible');
+        }
+    }, [isInView, mainControls]);
+
     return (
-        <>
-            <motion.span
-                ref={ref}
-                style={{ display: 'inline-flex', flexDirection: 'row', alignItems: 'flex-start', }}
-            >
-                {words.map((word, wordIndex) => (
-                    <React.Fragment key={`word-${wordIndex}`}>
-                        {/* Map characters within each word */}
-                        {word.split('').map((char, charIndex) => (
-                            <motion.span
-                                key={`${char}-${charIndex}`}
-                                style={{ display: 'inline-block' }}
-                                variants={
-                                    {
-                                        hidden: { opacity: 0, y: -50 },
-                                        visible: { opacity: 1, y: 0 }
-                                    }
-                                }
-                                initial="hidden"
-                                animate={mainControls}
-                                transition={{ type: 'spring', stiffness: 100, ease: "easeIn", delay: wordIndex * 0.2 + charIndex * 0.06, }}
-                            >
-                                {char}
-                            </motion.span>
-                        ))}
-                        {/* Add space after each word (except the last one) */}
-                        {wordIndex < words.length - 1 && <span>&nbsp;</span>}
-                    </React.Fragment>
-                ))}
-            </motion.span>
-        </>
-    )
-}
+        <motion.span ref={ref} style={{ display: 'inline-block' }}>
+            {words.map((word, wordIndex) => (
+                <React.Fragment key={`word-${wordIndex}`}>
+                   
+                    {word.split('').map((char, charIndex) => (
+                        <motion.span
+                            key={`${char}-${charIndex}`}
+                            variants={{
+                                hidden: { opacity: 0, y: -20 },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { delay: wordIndex * 0.2 + charIndex * 0.05, type: "spring", damping: 10, stiffness: 120 , duration:2 },
+                                },
+                            }}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            {char}
+                        </motion.span>
+                    ))}
+                    
+                    {wordIndex < words.length - 1 && <span>&nbsp;</span>}
+                </React.Fragment>
+            ))}
+        </motion.span>
+    );
+};
 
-export default WordAnimate
-
-
-
+export default WordAnimate;

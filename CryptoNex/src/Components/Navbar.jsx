@@ -72,11 +72,11 @@ const Navbar = () => {
                     <AnimatePresence>
                         {navVisible && (
                             <motion.nav
-                                initial={{ width: "0vw" }}
-                                animate={{ width: '100vw', pointerEvents: 'auto', height: "50vh" }}
-                                exit={{ width: "0vw", opacity: 0, pointerEvents: 'none', height: "0vh" }}
+                                initial={{ height: "0vh" }}
+                                animate={{ height: '100vh', pointerEvents: 'auto', height: "50vh" }}
+                                exit={{ opacity: 0, pointerEvents: 'none', height: "0vh", }}
                                 transition={{ duration: "0s", delay: 0, type: 'spring', stiffness: 90 }}
-                                className="flex flex-col align-middle bg-customYellow outline outline-slate-600 outline-1 items-center w-full top-[15%] text-base justify-around absolute left-0"
+                                className="flex flex-col align-middle bg-customYellow outline outline-slate-600 outline-1 items-center w-full top-[12%] text-base justify-around absolute left-0"
                             >
                                 <div className='flex flex-col h-[90%] justify-around '>
                                     {links.map((comp, index) => (
