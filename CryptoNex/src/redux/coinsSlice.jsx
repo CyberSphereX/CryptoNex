@@ -23,6 +23,7 @@ const coinsSlice = createSlice({
         pending: true,
         received: false,
         error: null,
+
     },
     reducers: {},
     extraReducers(builder) {

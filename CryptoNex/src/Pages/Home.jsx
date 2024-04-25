@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import bgImage from "../Assets/hero.png"
 import { apiCall } from "../redux/coinsSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { motion, useInView } from 'framer-motion';
 import AnimateX from '../Assets/SimpleAnimateX'
 import AnimateY from '../Assets/SimpleAnimateY'
 import WordAnimate from '../Assets/WordAnimate'
@@ -26,8 +25,12 @@ const Home = () => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.coins.data);
     const isLoading = useSelector((state) => state.coins.pending)
+
     useEffect(() => {
-        dispatch(apiCall());
+        if (isLoading) {
+
+            dispatch(apiCall());
+        }
 
     }, [dispatch])
 

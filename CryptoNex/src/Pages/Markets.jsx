@@ -1,198 +1,138 @@
-import React from 'react'
-import { Circles } from 'react-loader-spinner'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Circles } from 'react-loader-spinner';
+import { useSelector, useDispatch } from 'react-redux';
+import { apiCall } from "../redux/coinsSlice"
 
 const Markets = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const isPending = useSelector((state) => state.coins.pending);
+  const data = useSelector((state) => state.coins.data);
+  const dispatch = useDispatch();
+
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentData = data?.slice(indexOfFirstItem, indexOfLastItem) || [];
+
+  useEffect(() => {
+    if (isPending) {
+      dispatch(apiCall());
+    }
+  }, []);
+
+  const totalPages = Math.ceil(data?.length / itemsPerPage) || 0;
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const navigate = useNavigate();
+  const handleRowClick = (id) => {
+    navigate(`/Markets/${id}`);
+  };
+
   return (
-    <section class="container mx-auto p-6 font-mono">
-      <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-        <div class="w-full overflow-x-auto">
-          <table class="w-full">
-            <thead>
-              <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                <th class="px-4 py-3">Name</th>
-                <th class="px-4 py-3">Age</th>
-                <th class="px-4 py-3">Status</th>
-                <th class="px-4 py-3">Date</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white">
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold text-black">Sufyan</p>
-                      <p class="text-xs text-gray-600">Developer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-ms font-semibold border">22</td>
-                <td class="px-4 py-3 text-xs border">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-                </td>
-                <td class="px-4 py-3 text-sm border">6/4/2000</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold text-black">Stevens</p>
-                      <p class="text-xs text-gray-600">Programmer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-md font-semibold border">27</td>
-                <td class="px-4 py-3 text-xs border">
-                  <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm"> Pending </span>
-                </td>
-                <td class="px-4 py-3 text-sm border">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Nora</p>
-                      <p class="text-xs text-gray-600">Designer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-md font-semibold border">17</td>
-                <td class="px-4 py-3 text-xs border">
-                  <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> Nnacceptable </span>
-                </td>
-                <td class="px-4 py-3 text-sm border">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Ali</p>
-                      <p class="text-xs text-gray-600">Programmer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 border text-md font-semibold">23</td>
-                <td class="px-4 py-3 border text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-                </td>
-                <td class="px-4 py-3 border text-sm">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Khalid</p>
-                      <p class="text-xs text-gray-600">Designer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 border text-md font-semibold">20</td>
-                <td class="px-4 py-3 border text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm"> Pending </span>
-                </td>
-                <td class="px-4 py-3 border text-sm">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Nasser</p>
-                      <p class="text-xs text-gray-600">Pen Tester</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 border text-md font-semibold">29</td>
-                <td class="px-4 py-3 border text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-                </td>
-                <td class="px-4 py-3 border text-sm">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Mohammed</p>
-                      <p class="text-xs text-gray-600">Web Designer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 border text-md font-semibold">38</td>
-                <td class="px-4 py-3 border text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-                </td>
-                <td class="px-4 py-3 border text-sm">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Saad</p>
-                      <p class="text-xs text-gray-600">Data</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 border text-md font-semibold">19</td>
-                <td class="px-4 py-3 border text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-                </td>
-                <td class="px-4 py-3 border text-sm">6/10/2020</td>
-              </tr>
-              <tr class="text-gray-700">
-                <td class="px-4 py-3 border">
-                  <div class="flex items-center text-sm">
-                    <div class="relative w-8 h-8 mr-3 rounded-full">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Sami</p>
-                      <p class="text-xs text-gray-600">Developer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 border text-md font-semibold">21</td>
-                <td class="px-4 py-3 border text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-                </td>
-                <td class="px-4 py-3 border text-sm">6/10/2020</td>
-              </tr>
-            </tbody>
-          </table>
+    <div className="bg-customBg p-6 min-h-[90vh]">
+      <div className="lg:w-[85%] mx-auto">
+        <h1 className="lg:text-6xl md:text-5xl mt-10 text-4xl text-white font-bold mb-10 text-center">
+          Market Details
+        </h1>
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <div className="w-full overflow-x-auto">
+            {
+              isPending ? (<div className='flex flex-col text-customYellow items-center justify-center bg-customBg' >
+                <div >
+                  <Circles
+                    height="80"
+                    width="80"
+                    color="#f4a641"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                  />
+                </div>
+                <h1 className='-mr-2 mt-4 text-2xl'>Loading...</h1>
+              </div>) : (<table className="w-full table-auto border-collapse">
+                <thead>
+                  <tr className="text-md font-semibold tracking-wide text-left bg-customYellow text-white uppercase border-b border-gray-600">
+                    <th className="px-1 py-3">Rank</th>
+                    <th className="px-4 py-3">Coin</th>
+                    <th className="px-4 py-3">Price</th>
+                    <th className="px-4 py-3">Status</th>
+                    <th className="px-4 py-3">Date</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-customBg text-white">
+                  {
+                    currentData.map((instance, index) => (
+                      <tr
+                        key={index}
+                        className="text-white hover:bg-customYellow cursor-pointer text-lg"
+                        onClick={() => handleRowClick(instance.id)}
+                      >
+                        <td className="border font-semibold border-textColor px-1 py-3 text-center">
+                          {instance.market_cap_rank}
+                        </td>
+                        <td className="px-4 py-3 border border-textColor">
+                          <div className="flex items-center">
+                            <div className="relative w-16 h-16 mr-3 rounded-full md:block">
+                              <img
+                                className="object-cover w-full h-full rounded-full"
+                                src={instance.image}
+                                alt=""
+                                loading="lazy"
+                              />
+                            </div>
+                            <div>
+                              <p className="font-bold text-lg md:text-xl">{instance.id}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-ms font-semibold border border-textColor">
+                          ${' '}
+                          {instance.current_price.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </td>
+                        <td className="px-4 py-3 border border-textColor">
+                          <span className={instance.market_cap_change_percentage_24h > 0 ? 'text-green-500' : 'text-red-500'}>
+                            {instance.market_cap_change_percentage_24h}%
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 border font-semibold">
+                          ${' '}
+                          {instance.market_cap.toLocaleString().length > 14
+                            ? instance.market_cap.toLocaleString().slice(0, 14) + '...'
+                            : instance.market_cap.toLocaleString()}
+                        </td>
+                      </tr>
+                    ))
+
+                  }
+                </tbody>
+              </table>)
+            }
+          </div>
+          {/* Pagination controls */}
+          <div className="mt-4 flex justify-center flex-wrap">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => handlePageChange(pageNumber)}
+                className={`ml-2 px-3 py-1 mt-3 rounded-lg ${pageNumber === currentPage ? 'bg-customYellow text-white' : 'bg-white text-black'
+                  }`}
+              >
+                {pageNumber}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
-  )
-}
+    </div>
+  );
+};
 
-export default Markets
+export default Markets;
