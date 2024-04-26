@@ -69,7 +69,7 @@ const CoinDetails = () => {
                                 <SimpleAnimateX classes="my-auto flex flex-wrap flex-col mt-12 mb-48 xl:ml-20 w-[100%]" xval={-200}>
                                     <div className="flex justify-evenly flex-wrap items-center">
                                         <h1 className="text-3xl mb-10 text-center">
-                                            <span className="text-customYellow font-semibold"> Price:</span> {data.market_data.current_price.usd}
+                                            <span className="text-customYellow font-semibold"> Price: </span>{data.market_data.current_price.usd} $
                                         </h1>
                                         <h1 className="text-3xl mb-10 text-center">
                                             <span className="text-customYellow font-semibold"> Symbol:</span> {data.symbol}
