@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = () => {
     const links = [
-        { name: 'Home', to: '/home', icon: <HomeIcon className='text-customYellow' /> },
+        { name: 'Home', to: '/', icon: <HomeIcon className='text-customYellow' /> },
         { name: 'Markets', to: '/markets', icon: <StoreIcon className='text-customYellow' /> },
         { name: 'Contact Us', to: '/', icon: <ContactsIcon className='text-customYellow' /> },
         { name: 'Sign In', to: '/', icon: <LoginIcon className='text-customYellow' /> }
