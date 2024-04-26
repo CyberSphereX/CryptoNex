@@ -3,7 +3,7 @@
 
 Cryptonex is a cryptocurrency price insights application with an interactive user interface.
 
-#Live Demo 
+# Live Demo 
 
 https://crypto-nex.vercel.app/
 
