@@ -27,7 +27,7 @@ export const Animate = ({ children, delay, classes }) => {
                 }}
                 initial="hidden"
                 animate={mainControls}
-                transition={{ type: "tween", stiffness: 220, duration: 0.8, delay: delay }}
+                transition={{ type: "tween", stiffness: 220, duration: 0.5, delay: delay }}
                 className={classes}
 
             >

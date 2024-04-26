@@ -9,7 +9,6 @@ export const apiCall = createAsyncThunk(
             const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd', {
                 headers: { accept: 'application/json', 'x-cg-demo-api-key': 'CG-8QaRqe6fL3SXzBNNhuKrgUvZ' }
             });
-            console.log(response.data);
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);

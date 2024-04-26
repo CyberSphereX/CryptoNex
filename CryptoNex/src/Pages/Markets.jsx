@@ -33,7 +33,7 @@ const Markets = () => {
   };
 
   return (
-    <div className="bg-customBg p-6 min-h-[90vh]">
+    <div className="bg-customBg p-6 min-h-[95vh]">
       <div className="lg:w-[85%] mx-auto">
         <h1 className="lg:text-6xl md:text-5xl mt-10 text-4xl text-white font-bold mb-10 text-center">
           Market Details
@@ -57,12 +57,12 @@ const Markets = () => {
               </div>) : (<table className="w-full table-auto border-collapse">
                 <thead>
                   <tr className="text-md font-semibold tracking-wide text-left bg-customYellow text-white uppercase border-b border-gray-600">
-                    <th className="px-1 py-3">Rank</th>
-                    <th className="px-4 py-3">Coin</th>
-                    <th className="px-4 py-3">Symbol</th>
-                    <th className="px-4 py-3">Price</th>
-                    <th className="px-4 py-3">Status</th>
-                    <th className="px-4 py-3">Market Cap</th>
+                    <th className="px-1 py-3 text-center">Rank</th>
+                    <th className="px-4 py-3 ">Coin</th>
+                    <th className="px-4 py-3 text-center">Symbol</th>
+                    <th className="px-4 py-3 text-center">Price</th>
+                    <th className="px-4 py-3 text-center">Status</th>
+                    <th className="px-4 py-3 text-center">Market Cap</th>
                   </tr>
                 </thead>
                 <tbody className="bg-customBg text-white">
@@ -94,19 +94,19 @@ const Markets = () => {
                         <td className=' text-center border font-bold border-textColor'>
                           {instance.symbol.toUpperCase()}
                         </td>
-                        <td className="px-4 py-3 text-ms font-semibold border border-textColor">
+                        <td className="px-4 py-3 text-ms text-center font-semibold border border-textColor">
                           ${' '}
                           {instance.current_price.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}
                         </td>
-                        <td className="px-4 py-3 border border-textColor">
+                        <td className="px-4 py-3 text-center border border-textColor">
                           <span className={instance.market_cap_change_percentage_24h > 0 ? 'text-green-500' : 'text-red-500'}>
                             {instance.market_cap_change_percentage_24h}%
                           </span>
                         </td>
-                        <td className="px-4 py-3 border font-semibold">
+                        <td className="px-4 py-3 text-center border font-semibold">
                           ${' '}
                           {instance.market_cap.toLocaleString().length > 14
                             ? instance.market_cap.toLocaleString().slice(0, 14) + '...'
@@ -121,7 +121,7 @@ const Markets = () => {
             }
           </div>
           {/* Pagination controls */}
-          <div className="mt-4 flex justify-center flex-wrap">
+          <div className="mt-4 mb-6 flex justify-center flex-wrap">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
               <button
                 key={pageNumber}
