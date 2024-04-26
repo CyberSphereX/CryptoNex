@@ -24,6 +24,6 @@ The application fetches data from coinGecko APIs to ensure that the information 
 # Installation
 
 1. Clone Repository
-2. Navigate to the project directory and install the required dependencies using npm install install
-3. Run the development server using npm run dev
+2. Navigate to the project directory and install the required dependencies using npm install
+3. Run the development server using **npm run dev**
 4. The app should now be accessible on your local machine at http://localhost:5173
