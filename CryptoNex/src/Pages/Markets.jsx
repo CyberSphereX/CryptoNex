@@ -59,9 +59,10 @@ const Markets = () => {
                   <tr className="text-md font-semibold tracking-wide text-left bg-customYellow text-white uppercase border-b border-gray-600">
                     <th className="px-1 py-3">Rank</th>
                     <th className="px-4 py-3">Coin</th>
+                    <th className="px-4 py-3">Symbol</th>
                     <th className="px-4 py-3">Price</th>
                     <th className="px-4 py-3">Status</th>
-                    <th className="px-4 py-3">Date</th>
+                    <th className="px-4 py-3">Market Cap</th>
                   </tr>
                 </thead>
                 <tbody className="bg-customBg text-white">
@@ -89,6 +90,9 @@ const Markets = () => {
                               <p className="font-bold text-lg md:text-xl">{instance.id}</p>
                             </div>
                           </div>
+                        </td>
+                        <td className=' text-center border font-bold border-textColor'>
+                          {instance.symbol.toUpperCase()}
                         </td>
                         <td className="px-4 py-3 text-ms font-semibold border border-textColor">
                           ${' '}
